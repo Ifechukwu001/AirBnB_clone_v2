@@ -127,17 +127,20 @@ class HBNBCommand(cmd.Cmd):
             try:
                 key, value = param.split("=")
                 if value.startswith('"'):
-                    value = value.removeprefix('"')
-                    value = value.removesuffix('"')
+                    print(value, "::::")
+                    value = value.replace('"', '')
+                    value = value.replace('"', '')
                     value = value.replace("_", " ") 
                 elif "." in value:
                     value = float(value)
                 else:
                     value = int(value)
-            except:
+            except TypeError:
                 continue
             else:
+                print(key, ":", value)
                 new_instance.__dict__[key] = value
+        print(new_instance.__dict__)
         storage.save()
         print(new_instance.id)
         storage.save()
